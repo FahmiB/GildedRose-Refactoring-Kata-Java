@@ -12,39 +12,43 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (!item.name.equals(AGED_BRIE_ITEM_NAME)
-                && !item.name.equals(BACKSTAGE_PASSES_ITEM_NAME)) {
-                decreaseQuality(item);
-            } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
+            updateItem(item);
+        }
+    }
 
-                    if (item.name.equals(BACKSTAGE_PASSES_ITEM_NAME)) {
-                        if (item.sellIn < 11) {
-                            increaseQuality(item);
-                        }
+    private void updateItem(Item item) {
+        if (!item.name.equals(AGED_BRIE_ITEM_NAME)
+            && !item.name.equals(BACKSTAGE_PASSES_ITEM_NAME)) {
+            decreaseQuality(item);
+        } else {
+            if (item.quality < 50) {
+                item.quality = item.quality + 1;
 
-                        if (item.sellIn < 6) {
-                            increaseQuality(item);
-                        }
+                if (item.name.equals(BACKSTAGE_PASSES_ITEM_NAME)) {
+                    if (item.sellIn < 11) {
+                        increaseQuality(item);
+                    }
+
+                    if (item.sellIn < 6) {
+                        increaseQuality(item);
                     }
                 }
             }
+        }
 
-            if (!item.name.equals(SULFURAS_ITEM_NAME)) {
-                item.sellIn = item.sellIn - 1;
-            }
+        if (!item.name.equals(SULFURAS_ITEM_NAME)) {
+            item.sellIn = item.sellIn - 1;
+        }
 
-            if (item.sellIn < 0) {
-                if (!item.name.equals(AGED_BRIE_ITEM_NAME)) {
-                    if (!item.name.equals(BACKSTAGE_PASSES_ITEM_NAME)) {
-                        decreaseQuality(item);
-                    } else {
-                        item.quality = item.quality - item.quality;
-                    }
+        if (item.sellIn < 0) {
+            if (!item.name.equals(AGED_BRIE_ITEM_NAME)) {
+                if (!item.name.equals(BACKSTAGE_PASSES_ITEM_NAME)) {
+                    decreaseQuality(item);
                 } else {
-                    increaseQuality(item);
+                    item.quality = 0;
                 }
+            } else {
+                increaseQuality(item);
             }
         }
     }
