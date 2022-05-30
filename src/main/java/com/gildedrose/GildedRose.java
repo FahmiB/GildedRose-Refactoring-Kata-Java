@@ -72,19 +72,19 @@ class GildedRose {
 
     private void updateExpiration(Item item) {
         if (!item.name.equals(SULFURAS_ITEM_NAME)) {
-            item.sellIn = item.sellIn - 1;
+            item.sellIn--;
         }
     }
 
     private void decreaseQuality(Item item) {
         if (item.quality > 0) {
-          item.quality = item.quality - 1;
+          item.quality--;
         }
     }
 
     private void increaseQuality(Item item) {
         if (item.quality < 50) {
-            item.quality = item.quality + 1;
+            item.quality++;
         }
     }
 }
