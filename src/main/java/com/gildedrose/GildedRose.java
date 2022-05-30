@@ -36,9 +36,7 @@ class GildedRose {
             }
         }
 
-        if (!item.name.equals(SULFURAS_ITEM_NAME)) {
-            item.sellIn = item.sellIn - 1;
-        }
+        updateExpiration(item);
 
         if (item.sellIn < 0) {
             if (!item.name.equals(AGED_BRIE_ITEM_NAME)) {
@@ -50,6 +48,12 @@ class GildedRose {
             } else {
                 increaseQuality(item);
             }
+        }
+    }
+
+    private void updateExpiration(Item item) {
+        if (!item.name.equals(SULFURAS_ITEM_NAME)) {
+            item.sellIn = item.sellIn - 1;
         }
     }
 
