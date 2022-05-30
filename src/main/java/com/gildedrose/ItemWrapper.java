@@ -2,7 +2,6 @@ package com.gildedrose;
 
 public class ItemWrapper {
 
-    public static final String SULFURAS_ITEM_NAME = "Sulfuras, Hand of Ragnaros";
 
     protected Item item;
 
@@ -12,6 +11,8 @@ public class ItemWrapper {
                 return new AgedBrie(item);
             case BackstagePasses.BACKSTAGE_PASSES_ITEM_NAME:
                 return new BackstagePasses(item);
+            case Sulfuras.SULFURAS_ITEM_NAME:
+                return new Sulfuras(item);
         }
         return new ItemWrapper(item);
     }
@@ -30,23 +31,11 @@ public class ItemWrapper {
     }
 
     protected void updateQuality() {
-        switch (this.item.name) {
-            case SULFURAS_ITEM_NAME:
-                return;
-            default:
-                decreaseQuality();
-                break;
-        }
+        decreaseQuality();
     }
 
     protected void handleExpired() {
-        switch (this.item.name) {
-            case SULFURAS_ITEM_NAME:
-                break;
-            default:
-                decreaseQuality();
-                break;
-        }
+        decreaseQuality();
     }
 
     protected boolean isExpired() {
@@ -54,7 +43,7 @@ public class ItemWrapper {
     }
 
     protected void updateExpiration() {
-        if (!this.item.name.equals(SULFURAS_ITEM_NAME)) {
+        if (!this.item.name.equals(Sulfuras.SULFURAS_ITEM_NAME)) {
             this.item.sellIn--;
         }
     }
