@@ -12,75 +12,75 @@ public class ItemWrapper {
         this.item = item;
     }
 
-    public void updateItem(Item item) {
-        updateQuality(item);
-        updateExpiration(item);
+    public void updateItem() {
+        updateQuality();
+        updateExpiration();
 
-        if (isExpired(item)) {
-            handleExpired(item);
+        if (isExpired()) {
+            handleExpired();
         }
     }
 
-    private void updateQuality(Item item) {
-        switch (item.name) {
+    private void updateQuality() {
+        switch (this.item.name) {
             case AGED_BRIE_ITEM_NAME:
-                if (item.quality < 50) {
-                    item.quality++;
+                if (this.item.quality < 50) {
+                    this.item.quality++;
                 }
                 break;
             case BACKSTAGE_PASSES_ITEM_NAME:
-                increaseQuality(item);
-                if (item.sellIn < 11) {
-                    increaseQuality(item);
+                increaseQuality();
+                if (this.item.sellIn < 11) {
+                    increaseQuality();
                 }
 
-                if (item.sellIn < 6) {
-                    increaseQuality(item);
+                if (this.item.sellIn < 6) {
+                    increaseQuality();
                 }
                 break;
             case SULFURAS_ITEM_NAME:
                 return;
             default:
-                decreaseQuality(item);
+                decreaseQuality();
                 break;
         }
     }
 
-    private void handleExpired(Item item) {
-        switch (item.name) {
+    private void handleExpired() {
+        switch (this.item.name) {
             case AGED_BRIE_ITEM_NAME:
-                increaseQuality(item);
+                increaseQuality();
                 break;
             case BACKSTAGE_PASSES_ITEM_NAME:
-                item.quality = 0;
+                this.item.quality = 0;
                 break;
             case SULFURAS_ITEM_NAME:
                 break;
             default:
-                decreaseQuality(item);
+                decreaseQuality();
                 break;
         }
     }
 
-    private boolean isExpired(Item item) {
-        return item.sellIn < 0;
+    private boolean isExpired() {
+        return this.item.sellIn < 0;
     }
 
-    private void updateExpiration(Item item) {
-        if (!item.name.equals(SULFURAS_ITEM_NAME)) {
-            item.sellIn--;
+    private void updateExpiration() {
+        if (!this.item.name.equals(SULFURAS_ITEM_NAME)) {
+            this.item.sellIn--;
         }
     }
 
-    private void decreaseQuality(Item item) {
-        if (item.quality > 0) {
-            item.quality--;
+    private void decreaseQuality() {
+        if (this.item.quality > 0) {
+            this.item.quality--;
         }
     }
 
-    private void increaseQuality(Item item) {
-        if (item.quality < 50) {
-            item.quality++;
+    private void increaseQuality() {
+        if (this.item.quality < 50) {
+            this.item.quality++;
         }
     }
 }
