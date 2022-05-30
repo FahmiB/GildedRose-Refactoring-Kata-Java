@@ -2,11 +2,18 @@ package com.gildedrose;
 
 public class ItemWrapper {
 
-    public static final String AGED_BRIE_ITEM_NAME = "Aged Brie";
     public static final String BACKSTAGE_PASSES_ITEM_NAME = "Backstage passes to a TAFKAL80ETC concert";
     public static final String SULFURAS_ITEM_NAME = "Sulfuras, Hand of Ragnaros";
 
     private Item item;
+
+    public static ItemWrapper createItemWrapper(Item item) {
+        switch (item.name) {
+            case AgedBrie.AGED_BRIE_ITEM_NAME:
+                return new AgedBrie(item);
+        }
+        return new ItemWrapper(item);
+    }
 
     public ItemWrapper(Item item) {
         this.item = item;
@@ -21,12 +28,10 @@ public class ItemWrapper {
         }
     }
 
-    private void updateQuality() {
+    protected void updateQuality() {
         switch (this.item.name) {
-            case AGED_BRIE_ITEM_NAME:
-                if (this.item.quality < 50) {
-                    this.item.quality++;
-                }
+            case AgedBrie.AGED_BRIE_ITEM_NAME:
+                increaseQuality();
                 break;
             case BACKSTAGE_PASSES_ITEM_NAME:
                 increaseQuality();
@@ -46,9 +51,9 @@ public class ItemWrapper {
         }
     }
 
-    private void handleExpired() {
+    protected void handleExpired() {
         switch (this.item.name) {
-            case AGED_BRIE_ITEM_NAME:
+            case AgedBrie.AGED_BRIE_ITEM_NAME:
                 increaseQuality();
                 break;
             case BACKSTAGE_PASSES_ITEM_NAME:
@@ -62,23 +67,23 @@ public class ItemWrapper {
         }
     }
 
-    private boolean isExpired() {
+    protected boolean isExpired() {
         return this.item.sellIn < 0;
     }
 
-    private void updateExpiration() {
+    protected void updateExpiration() {
         if (!this.item.name.equals(SULFURAS_ITEM_NAME)) {
             this.item.sellIn--;
         }
     }
 
-    private void decreaseQuality() {
+    protected void decreaseQuality() {
         if (this.item.quality > 0) {
             this.item.quality--;
         }
     }
 
-    private void increaseQuality() {
+    protected void increaseQuality() {
         if (this.item.quality < 50) {
             this.item.quality++;
         }
