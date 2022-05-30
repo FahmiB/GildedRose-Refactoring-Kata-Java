@@ -2,15 +2,16 @@ package com.gildedrose;
 
 public class ItemWrapper {
 
-    public static final String BACKSTAGE_PASSES_ITEM_NAME = "Backstage passes to a TAFKAL80ETC concert";
     public static final String SULFURAS_ITEM_NAME = "Sulfuras, Hand of Ragnaros";
 
-    private Item item;
+    protected Item item;
 
     public static ItemWrapper createItemWrapper(Item item) {
         switch (item.name) {
             case AgedBrie.AGED_BRIE_ITEM_NAME:
                 return new AgedBrie(item);
+            case BackstagePasses.BACKSTAGE_PASSES_ITEM_NAME:
+                return new BackstagePasses(item);
         }
         return new ItemWrapper(item);
     }
@@ -30,16 +31,6 @@ public class ItemWrapper {
 
     protected void updateQuality() {
         switch (this.item.name) {
-            case BACKSTAGE_PASSES_ITEM_NAME:
-                increaseQuality();
-                if (this.item.sellIn < 11) {
-                    increaseQuality();
-                }
-
-                if (this.item.sellIn < 6) {
-                    increaseQuality();
-                }
-                break;
             case SULFURAS_ITEM_NAME:
                 return;
             default:
@@ -50,9 +41,6 @@ public class ItemWrapper {
 
     protected void handleExpired() {
         switch (this.item.name) {
-            case BACKSTAGE_PASSES_ITEM_NAME:
-                this.item.quality = 0;
-                break;
             case SULFURAS_ITEM_NAME:
                 break;
             default:

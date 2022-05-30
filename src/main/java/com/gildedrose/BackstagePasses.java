@@ -11,10 +11,17 @@ public class BackstagePasses extends ItemWrapper{
     @Override
     protected void updateQuality() {
         increaseQuality();
+        if (this.item.sellIn < 11) {
+            increaseQuality();
+        }
+
+        if (this.item.sellIn < 6) {
+            increaseQuality();
+        }
     }
 
     @Override
     protected void handleExpired() {
-        increaseQuality();
+        this.item.quality = 0;
     }
 }
