@@ -38,17 +38,25 @@ class GildedRose {
 
         updateExpiration(item);
 
-        if (item.sellIn < 0) {
-            if (!item.name.equals(AGED_BRIE_ITEM_NAME)) {
-                if (!item.name.equals(BACKSTAGE_PASSES_ITEM_NAME)) {
-                    decreaseQuality(item);
-                } else {
-                    item.quality = 0;
-                }
-            } else {
-                increaseQuality(item);
-            }
+        if (isExpired(item)) {
+            handleExpired(item);
         }
+    }
+
+    private void handleExpired(Item item) {
+        if (!item.name.equals(AGED_BRIE_ITEM_NAME)) {
+            if (!item.name.equals(BACKSTAGE_PASSES_ITEM_NAME)) {
+                decreaseQuality(item);
+            } else {
+                item.quality = 0;
+            }
+        } else {
+            increaseQuality(item);
+        }
+    }
+
+    private boolean isExpired(Item item) {
+        return item.sellIn < 0;
     }
 
     private void updateExpiration(Item item) {
