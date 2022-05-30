@@ -13,4 +13,7 @@ public class Sulfuras extends ItemWrapper{
 
     @Override
     protected void handleExpired() {}
+
+    @Override
+    protected void updateExpiration() {}
 }

@@ -43,9 +43,7 @@ public class ItemWrapper {
     }
 
     protected void updateExpiration() {
-        if (!this.item.name.equals(Sulfuras.SULFURAS_ITEM_NAME)) {
-            this.item.sellIn--;
-        }
+        this.item.sellIn--;
     }
 
     protected void decreaseQuality() {
