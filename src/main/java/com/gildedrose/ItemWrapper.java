@@ -30,9 +30,6 @@ public class ItemWrapper {
 
     protected void updateQuality() {
         switch (this.item.name) {
-            case AgedBrie.AGED_BRIE_ITEM_NAME:
-                increaseQuality();
-                break;
             case BACKSTAGE_PASSES_ITEM_NAME:
                 increaseQuality();
                 if (this.item.sellIn < 11) {
@@ -53,9 +50,6 @@ public class ItemWrapper {
 
     protected void handleExpired() {
         switch (this.item.name) {
-            case AgedBrie.AGED_BRIE_ITEM_NAME:
-                increaseQuality();
-                break;
             case BACKSTAGE_PASSES_ITEM_NAME:
                 this.item.quality = 0;
                 break;
