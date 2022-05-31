@@ -145,7 +145,7 @@ class GildedRoseTest {
 
     @Test
     void conjured_item_quality_degrades_twice_as_fast_after_sellIn_date_expiry() {
-        Item item = new Item("Conjured", 10, 20);
+        Item item = new Item("Conjured", 0, 20);
         GildedRose app = new GildedRose(new Item[] { item });
 
         app.updateQuality();
