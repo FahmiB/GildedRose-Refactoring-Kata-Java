@@ -2,7 +2,6 @@ package com.gildedrose;
 
 public class ItemWrapper {
 
-
     protected Item item;
 
     public static ItemWrapper createItemWrapper(Item item) {
@@ -13,6 +12,8 @@ public class ItemWrapper {
                 return new BackstagePasses(item);
             case Sulfuras.SULFURAS_ITEM_NAME:
                 return new Sulfuras(item);
+            case Conjured.CONJURED_ITEM_NAME:
+                return new Conjured(item);
         }
         return new ItemWrapper(item);
     }
